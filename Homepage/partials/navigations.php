@@ -11,6 +11,10 @@
 				</div>
 			</div>
 	</div>
+	<?php 
+	$slider = new Slider();
+	$result = $slider->fetchSlider();
+	?>
 	<div id="demo-1" data-zs-src='["images/4.jpg", "images/2.jpg", "images/1.jpg","images/3.jpg"]' data-zs-overlay="dots">
 		<div class="demo-inner-content">
 		<!--/header-w3l-->

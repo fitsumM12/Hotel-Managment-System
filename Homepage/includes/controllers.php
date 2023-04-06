@@ -53,5 +53,11 @@ class Gallery{
         return $result;
     }
 }
-
+class Slider {
+    public function fetchSlider(){
+        Global $conn;
+        $result = $conn->query("SELECT `id`, `title`, `image`, `subtitle` FROM `slider`");
+        return $result;
+    }
+}
 ?>
