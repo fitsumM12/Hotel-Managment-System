@@ -3,11 +3,12 @@
 
 <?php include_once "partials/head.php"; ?>
 <?php include_once "includes/control.php"; ?>
-<?php include_once "includes/postcontrol.php"; ?>
+
+<?php include_once "includes/roomcontrol.php"; ?>
 <?php include_once "partials/nav.php"; ?>
 
 <div class="col-md-12 grid-margin stretch-card">
-    <?php $post->fetchPost(); ?>
+    <?php $room->fetchRoom(); ?>
 </div>
 
 

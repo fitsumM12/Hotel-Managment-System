@@ -23,7 +23,7 @@
 
 
             <form class="forms-sample" method="POST" enctype="multipart/form-data">
-                <?php echo '<img src="../Home/images/slider/'.$rows['sl_image'].'"  style="border-radius:15px" alt="" width="auto" height="200px">';  ?>
+                <?php echo '<img src="../Homepage/images/'.$rows['image'].'"  style="border-radius:15px" alt="" width="auto" height="200px">';  ?>
                 <br>
                 <div class="btn btn-success" style="position: relative; overflow: hidden;">
                     select image
@@ -31,7 +31,7 @@
                         style=" position: absolute;  opacity: 0; right: 0; top: 0;" />
                 </div>
                 <div class=" btn  btn-primary text-right">
-                    <button type="submit" class="btn" value="<?php echo $rows['sl_id']; ?>"
+                    <button type="submit" class="btn" value="<?php echo $rows['id']; ?>"
                         name="updateSliderImage">Update</button>
                 </div>
 

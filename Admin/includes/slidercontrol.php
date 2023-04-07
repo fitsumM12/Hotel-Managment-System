@@ -4,7 +4,7 @@ include_once "db.inc.php";
 class Slider{
     public function viewSlider(){
         GLOBAL $conn;
-        $sql ="SELECT `sl_id`, `sl_title`, `sl_subtitle`,`sl_status` FROM `slider` WHERE 1";
+        $sql ="SELECT * FROM `slider` WHERE 1";
         try{
             $result = $conn->query($sql);
             while($rows = $result->fetch_assoc()){
@@ -12,11 +12,11 @@ class Slider{
             echo"
             <tr>
             <td>
-            <input type='checkbox' id='selectedPost' name='selectedPost[]' value=".$rows['sl_id']."></input></td>
-                <td>".$rows['sl_title']."</td>
-                <td>".$rows['sl_subtitle']."</td>
-                <td>".$rows['sl_status']."</td>
-                <td><label class='badge badge-success'><a href='slider_preview?sl_id=".$rows['sl_id']."'>VIEW</a></label></td>
+            <input type='checkbox' id='selectedPost' name='selectedPost[]' value=".$rows['id']."></input></td>
+                <td>".$rows['title']."</td>
+                <td>".$rows['subtitle']."</td>
+                <td>".$rows['status']."</td>
+                <td><label class='badge badge-success'><a href='slider_preview?sl_id=".$rows['id']."'>VIEW</a></label></td>
             </tr>
                 
             ";
@@ -31,7 +31,7 @@ class Slider{
         global $conn;
         if(isset($_GET['sl_id'])){
             $sl_id= $_GET['sl_id'];
-            $sql = "SELECT `sl_id`, `sl_title`, `sl_subtitle`, `sl_image`, `link`, `sl_status` FROM `slider` WHERE   `sl_id`='$sl_id'";
+            $sql = "SELECT * FROM `slider` WHERE   `id`='$sl_id'";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             echo '
@@ -40,12 +40,12 @@ class Slider{
                 <div class="row">
                     <div class="col-md-6">
                         <address>
-                        <img src="../Home/images/slider/'.$row['sl_image'].'"  style="border-radius:15px" alt="" width="auto" height="200px">
+                        <img src="../Homepage/images/'.$row['image'].'"  style="border-radius:15px" alt="" width="auto" height="200px">
                         <br>
                             <p class="font-weight-bold">Title</p>
-                            <p>'.$row['sl_title'].'</p>
+                            <p>'.$row['title'].'</p>
                             <p class="font-weight-bold">Subtitle:</p>
-                            <p> '.$row['sl_subtitle'].'</p>
+                            <p> '.$row['subtitle'].'</p>
                         </address>
                     </div>
                     <div class="col-md-6">';
@@ -63,9 +63,7 @@ class Slider{
                     echo'
                       <address class="text-primary">
                     <p class="font-weight-bold">status: </p>
-                    <p class="mb-2"> '.$row['sl_status'].'</p>
-                    <p class="font-weight-bold"> Link: </p>
-                    <p class="mb-2"> '.$row['link'].'
+                    <p class="mb-2"> '.$row['status'].'</p>
                    </p>
                         
                     </address>
@@ -83,7 +81,7 @@ class Slider{
         try{
             if(isset($_GET['Edit'])){
                 $sl_id = $_GET['Edit'];
-                $query = "SELECT * FROM `slider` WHERE `sl_id`='$sl_id' limit 1";  
+                $query = "SELECT * FROM `slider` WHERE `id`='$sl_id' limit 1";  
                 $result =NULL;
                 
                 if(!$conn->query($query)){
@@ -116,8 +114,8 @@ class Slider{
                 if($img_type=="image/jpeg" || $img_type=="image/jpg" || $img_type=="image/png" || $img_type=="image/gif"){
                     if($img_size<=50000000){
                         $pic_name=time()."_slider_".$img;
-                        move_uploaded_file($img_tmp_name,"../Home/images/slider/".$pic_name);
-                        $query = "UPDATE `slider` SET `sl_image`='$pic_name' WHERE `sl_id`='$sl_id'";
+                        move_uploaded_file($img_tmp_name,"../Homepage/images/".$pic_name);
+                        $query = "UPDATE `slider` SET `image`='$pic_name' WHERE `id`='$sl_id'";
                     
                         if($conn->query($query)){
                             
@@ -147,12 +145,10 @@ class Slider{
             $sl_id = $_POST['updateSlider'];
             $sliderTitle = $conn->real_escape_string($_POST['sliderTitle']);
             $sliderSubtitle = $conn->real_escape_string($_POST['sliderSubtitle']);
-            $link = $conn->real_escape_string($_POST['sliderLink']);
-            $sql = "UPDATE `slider` SET `sl_title`='$sliderTitle',`sl_subtitle`='$sliderSubtitle', `link`='$link' WHERE  `sl_id`='$sl_id'";
+            // $link = $conn->real_escape_string($_POST['sliderLink']);
+            $sql = "UPDATE `slider` SET `title`='$sliderTitle',`subtitle`='$sliderSubtitle' WHERE  `id`='$sl_id'";
             try{
                 if($conn->query($sql)){
-                    
-                    $conn->query($query);
                     Header("Location: slider_preview?sl_id=$sl_id"); 
                 }else{ 
                     throw new Exception("Incorrect syntax");
@@ -169,7 +165,7 @@ class Slider{
         if(isset($_POST['addSlider'])){
             $sliderTitle = $conn->real_escape_string($_POST['sliderTitle']);
             $sliderSubtitle = $conn->real_escape_string($_POST['sliderSubtitle']);
-            $link = $conn->real_escape_string($_POST['link']);
+            // $link = $conn->real_escape_string($_POST['link']);
             // handling the file or the image
             $img=$_FILES['img']['name'];
             $img_type=$_FILES['img']['type'];
@@ -180,8 +176,8 @@ class Slider{
                 if($img_type=="image/jpeg" || $img_type=="image/jpg" || $img_type=="image/png" || $img_type=="image/gif"){
                     if($img_size<=50000000){
                     $pic_name=time()."_slider_".$img;
-                    move_uploaded_file($img_tmp_name,"../Home/images/slider/".$pic_name);
-                    $query = "INSERT INTO `slider`( `sl_title`, `sl_subtitle`, `sl_image`, `link`) VALUES ('$sliderTitle','$sliderSubtitle','$pic_name','$link')";
+                    move_uploaded_file($img_tmp_name,"../Homepage/images/".$pic_name);
+                    $query = "INSERT INTO `slider`( `title`, `subtitle`, `image`) VALUES ('$sliderTitle','$sliderSubtitle','$pic_name')";
                    
                     if(!$conn->query($query)){
                         throw new Exception("Query error".$conn->error);
@@ -211,7 +207,7 @@ class Slider{
             if(isset($_GET['approveSlider'])){
                 foreach($_POST['selectedSlider'] as $sl_id)
                 {
-                    $query = "UPDATE `slider` SET `sl_status`='approved' WHERE `sl_id`='$sl_id'";
+                    $query = "UPDATE `slider` SET `status`='approved' WHERE `id`='$sl_id'";
                     $conn->query($query);
                 }
             }
@@ -223,7 +219,7 @@ class Slider{
             if(isset($_GET['unapproveSlider'])){
                 foreach($_POST['selectedSlider'] as $sl_id)
                 {
-                    $query = "UPDATE `slider` SET `sl_status`='unapproved' WHERE `sl_id`='$sl_id'";
+                    $query = "UPDATE `slider` SET `status`='unapproved' WHERE `id`='$sl_id'";
                     $conn->query($query);
                 }
             }
@@ -235,7 +231,7 @@ class Slider{
             if(isset($_GET['deleteSlider'])){
                 foreach($_POST['selectedSlider'] as $sl_id)
                 {
-                    $query = "DELETE FROM `slider` WHERE `sl_id`='$sl_id'";
+                    $query = "DELETE FROM `slider` WHERE `id`='$sl_id'";
                     $conn->query($query);
                 }
             }

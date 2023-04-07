@@ -20,10 +20,9 @@
                                 else{
                                     
                                     $rows = $slider->editSlider();
-                                    $sl_id = $rows['sl_id'];
-                                    $sl_title = $rows['sl_title'];
-                                    $sl_subtitle = $rows['sl_subtitle'];
-                                    $link = $rows['link'];
+                                    $sl_id = $rows['id'];
+                                    $sl_title = $rows['title'];
+                                    $sl_subtitle = $rows['subtitle'];
                                ?>
 
 
@@ -39,11 +38,6 @@
                     <label for="sliderSubtitle">Slider Subtitle</label>
                     <input type="text" class="form-control" name="sliderSubtitle" id="sliderSubtitle"
                         value="<?php echo $sl_subtitle; ?>" placeholder="subtitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="sliderLink">Slider Link</label>
-                    <input type="text" class="form-control" name="sliderLink" id="sliderLink"
-                        value="<?php echo $link; ?>" placeholder="Link" required>
                 </div>
                 <button type=" submit" value="<?php echo $sl_id; ?>" name="updateSlider"
                     class="btn btn-primary mr-2">Update</button>

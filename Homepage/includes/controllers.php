@@ -56,7 +56,7 @@ class Gallery{
 class Slider {
     public function fetchSlider(){
         Global $conn;
-        $result = $conn->query("SELECT `id`, `title`, `image`, `subtitle` FROM `slider`");
+        $result = $conn->query("SELECT * FROM `slider`");
         return $result;
     }
 }

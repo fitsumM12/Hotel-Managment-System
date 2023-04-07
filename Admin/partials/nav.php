@@ -34,14 +34,12 @@ include_once "includes/control.php";
                         <span class="menu-icon">
                             <i class="mdi mdi-laptop"></i>
                         </span>
-                        <span class="menu-title">Posts</span>
+                        <span class="menu-title">Booking</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="posts">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="post_add">Add Post</a>
-                            </li>
-                            <li class="nav-item"> <a class="nav-link" href="post_view">View Post</a></li>
+                                                       <li class="nav-item"> <a class="nav-link" href="book_view">View Booking</a></li>
 
                         </ul>
                     </div>
@@ -60,6 +58,25 @@ include_once "includes/control.php";
                             <li class="nav-item"> <a class="nav-link" href="team_add">Add Member</a>
                             </li>
                             <li class="nav-item"> <a class="nav-link" href="team_view">View Members</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#team" aria-expanded="false" aria-controls="team">
+                        <span class="menu-icon">
+                            <i class=" mdi mdi-account-multiple-plus"></i>
+                        </span>
+                        <span class="menu-title">Room</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="team">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="room_add">Add Room</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link" href="room_view">View Room</a></li>
 
                         </ul>
                     </div>
@@ -116,14 +133,7 @@ include_once "includes/control.php";
                 </li>
                 <?php }
                     ?>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" href="feedback">
-                        <span class="menu-icon">
-                            <i class=" mdi mdi-comment-multiple-outline "></i>
-                        </span>
-                        <span class="menu-title">Feedback</span>
-                    </a>
-                </li>
+           
 
             </ul>
         </nav>

@@ -23,13 +23,9 @@
                     <input type="text" class="form-control" name="sliderSubtitle" id="sliderSubtitle"
                         placeholder="slider subtitle" required>
                 </div>
-                <div class="form-group">
-                    <label for="link">Slider link</label>
-                    <input type="text" class="form-control" name="link" id="link" placeholder="slider link">
-                </div>
 
                 <div class="form-group">
-                    <label>Icon/Image</label>
+                    <label>Image</label>
                     <input type="file" accept="image/*" name="img" class="form-control" required>
                 </div>
                 <button type="submit" name="addSlider" class="btn btn-primary mr-2">Add Slider</button>

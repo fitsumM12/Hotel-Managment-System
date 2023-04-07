@@ -14,8 +14,17 @@
 	<?php 
 	$slider = new Slider();
 	$result = $slider->fetchSlider();
+	$data = array();
+	if ($result->num_rows > 0) {
+		while ($row = $result->fetch_assoc()) {
+			// $data[] = $row['image'];
+			array_push($data, "images/".$row['image']);
+		}
+	}
+	$data1 = $data[0];
+	$data2 = $data[1];
 	?>
-	<div id="demo-1" data-zs-src='["images/4.jpg", "images/2.jpg", "images/1.jpg","images/3.jpg"]' data-zs-overlay="dots">
+	<div id="demo-1" data-zs-src='["<?php echo$data1 ?>","<?php echo$data2?>"]' data-zs-overlay="dots">
 		<div class="demo-inner-content">
 		<!--/header-w3l-->
 			   <div class="header-w3-agileits" id="home">
@@ -28,7 +37,7 @@
 											<span class="icon-bar"></span>
 											<span class="icon-bar"></span>
 										</button>
-										<h1><a  href="index.html"><span>A</span>ddis Hotel<p class="s-log">Booking</p></a>
+										<h1><a  href="index.php"><span>A</span>ddis Hotel<p class="s-log">Booking</p></a>
 										 
 										</h1>
 									</div>
@@ -44,14 +53,9 @@
 										
 												<li><a href="contact.php">Contact</a></li>
 												<li><a href="reservesion.php">BOOK NOW</a></li>
-
-												<?php if(!isset($_SESSION['user_email'])){?>
 													<li><a href="login.php">Login</a></li>
 													
-												<?php }else{ ?>
-													<li><a href="../HotelAdmin/index.php">Admin</a></li>
-													<li><a href="includes/logout.php">Logout</a></li>
-												<?php } ?>
+								
 
 										</ul>
 
@@ -75,13 +79,34 @@
 							</div> 	
 		<!--//header-w3l-->
 			<!--/banner-info-->
-			   <div class="baner-info">   
+			
+				<div class="baner-info">   
 			      <h3>Wel<span>Come </span>To   <span>Luxury </span> Hotel</h3>
-				  <h4>Book Your Dream Resort Destinations</h4>
-				  <p>Enjoy Your Stay In</p>
+				  <?php  
+				  $slider = new Slider();
+				  $result = $slider->fetchSlider();
+				  $title = array();
+				  $subtitle = array();
+				  if ($result->num_rows > 0) {
+					while ($row = $result->fetch_assoc()) {
+						$data[] = $row['image'];
+						array_push($title, $row['title']);
+						array_push($subtitle, $row['subtitle']);
+					}
+				}
+				$title= $title[0];
+				$subtitle = $subtitle[0];
+				?>
+				  <h4><?php echo $title; ?></h4>
+				  <p><?php  echo $subtitle;?></p>
+				  <?php
+				
+		?>	
 			   </div>
+			  		   
 			<!--/banner-ingo-->
 			
 		</div>
 	</div>
+
     </div>
