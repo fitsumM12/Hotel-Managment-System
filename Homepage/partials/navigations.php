@@ -2,8 +2,8 @@
 			<div class="top-srip-agileinfo">
 				<div class="agileits-contact-info text-right">
 					<ul>
-						<li><i class="fa fa-volume-control-phone" aria-hidden="true"></i> +91 83 74 08 69 18</li>
-						<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:kenawnuru@gmail.com">aakgzHotel@gmail.com</a></li>
+						<li><i class="fa fa-volume-control-phone" aria-hidden="true"></i> +25190000000</li>
+						<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:kenawnuru@gmail.com">Gelchu@gmail.com</a></li>
 					</ul>
 				</div>
 				<div class="clearfix">
@@ -53,9 +53,8 @@
 										
 												<li><a href="contact.php">Contact</a></li>
 												<li><a href="reservesion.php">BOOK NOW</a></li>
-													<li><a href="login.php">Login</a></li>
+													<!-- <li><a href="login.php">Login</a></li> -->
 													
-								
 
 										</ul>
 

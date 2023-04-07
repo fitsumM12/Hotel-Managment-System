@@ -1,5 +1,6 @@
 <?php 
 
+ob_start();
 include_once "includes/navigationcontrol.php";
 include_once "includes/control.php";
 ?>
@@ -10,10 +11,10 @@ include_once "includes/control.php";
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
                 <a class="sidebar-brand brand-logo" href="dashboard">
                     <button class='btn'>
-                        <h4>XYZ</h4>
+                        <h4>ADDIS HOTEL</h4>
                     </button>
                 </a>
-                <a class="sidebar-brand brand-logo-mini" href="dashboard">XYZ
+                <a class="sidebar-brand brand-logo-mini" href="dashboard">ADDIS HOTEL
 
                 </a>
             </div>
@@ -65,14 +66,14 @@ include_once "includes/control.php";
 
 
                 <li class="nav-item menu-items">
-                    <a class="nav-link" data-toggle="collapse" href="#team" aria-expanded="false" aria-controls="team">
+                    <a class="nav-link" data-toggle="collapse" href="#room" aria-expanded="false" aria-controls="room">
                         <span class="menu-icon">
                             <i class=" mdi mdi-account-multiple-plus"></i>
                         </span>
                         <span class="menu-title">Room</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="team">
+                    <div class="collapse" id="room">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="room_add">Add Room</a>
                             </li>
@@ -160,7 +161,7 @@ include_once "includes/control.php";
                                 aria-labelledby="profileDropdown">
                                 <h6 class="p-3 mb-0">Profile</h6>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <!-- <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-settings text-success">
@@ -171,7 +172,7 @@ include_once "includes/control.php";
                                         <p class="preview-subject mb-1"><button class="btn"
                                                 id="profile_setting">setting</button></p>
                                     </div>
-                                </a>
+                                </a> -->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">

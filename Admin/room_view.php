@@ -18,8 +18,8 @@
             <?php   
             if($_SESSION['tm_role']=='admin'){
                 ?>
-            <p class="text-right"><button class="btn btn-success" id="approveMember">Approve</button>&nbsp;&nbsp;&nbsp;
-                <button class="btn badge-warning" id="unapproveMember">unApprove</button>&nbsp;&nbsp;&nbsp;
+            <p class="text-right"><button class="btn btn-success" id="approveMember">free</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn badge-warning" id="unapproveMember">under Maintenance</button>&nbsp;&nbsp;&nbsp;
                 <button class="btn btn-danger" id="deleteMember">Delete</button>
             </p>
 

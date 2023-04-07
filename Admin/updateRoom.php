@@ -57,11 +57,15 @@
                         value="<?php echo $no_of_room; ?>" placeholder="Name" required>
                 </div>
                 <div class="form-group">
-                    <label for="serviceTitle">Status</label>
-                    <input type="text" class="form-control" name="room_status" id="serviceTitle"
-                        value="<?php echo $room_status; ?>" placeholder="Name" required>
+                <label for="">Image:</label>
+                <div class="btn btn-success" style="position: relative; overflow: hidden;">
+                    select image
+                    <input type="file" name="img" accept="image/*" required
+                        style=" position: absolute;  opacity: 0; right: 0; top: 0;" />
                 </div>
-
+                </div>
+                
+                
                 <button type="submit" value="<?php echo $room_id; ?>" name="updateRoom"
                     class="btn btn-primary mr-2">Update</button>
             </form>

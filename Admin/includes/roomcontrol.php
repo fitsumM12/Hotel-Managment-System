@@ -4,7 +4,7 @@ include_once "db.inc.php";
 class Room{
     public function viewRoom (){
         GLOBAL $conn;
-        $sql ="SELECT * FROM `room` WHERE 1";
+        $sql ="SELECT * FROM `room`";
         try{
             $result = $conn->query($sql);
             while($rows = $result->fetch_assoc()){
@@ -15,7 +15,7 @@ class Room{
             <input type='checkbox' id='selectedMember' name='selectedMember[]' value=".$rows['room_id']."></input></td>
             <td>".$rows['room_id']."</td> 
             <td>".$rows['room_type']."</td>
-            <td>".$rows['room_price']."</td>
+            <td>".$rows['room_name']."</td>
             <td>".$rows['room_status']."</td>
             <td><a href='room_preview?tm_id=".$rows['room_id']."'>view</a></td>
         </tr>
@@ -75,26 +75,90 @@ class Room{
             ';
         }
     }
+   
     public function updateRoom(){
         GLOBAL $conn;
-        if(isset($_['updateSlider'])){
-            $sl_id = $_POST['updateSlider'];
-            $sliderTitle = $conn->real_escape_string($_POST['sliderTitle']);
-            $sliderSubtitle = $conn->real_escape_string($_POST['sliderSubtitle']);
-            // $link = $conn->real_escape_string($_POST['sliderLink']);
-            $sql = "UPDATE `slider` SET `title`='$sliderTitle',`subtitle`='$sliderSubtitle' WHERE  `id`='$sl_id'";
+        if(isset($_POST['updateRoom'])){
+            // echo "something";
+            $room_id = $_POST['room_id'];
+            $room_name = $_POST['room_name'];
+            $room_type = $_POST['room_type'];
+            $no_of_room = $_POST['no_of_room'];
+            $img=$_FILES['img']['name'];
+            $img_type=$_FILES['img']['type'];
+            $img_tmp_name=$_FILES['img']['tmp_name'];
+            $img_size=$_FILES['img']['size'];
+        
             try{
-                if($conn->query($sql)){
-                    Header("Location: slider_preview?sl_id=$sl_id"); 
-                }else{ 
-                    throw new Exception("Incorrect syntax");
+                if($img_type=="image/jpeg" || $img_type=="image/jpg" || $img_type=="image/png" || $img_type=="image/gif"){
+                    if($img_size<=50000000){
+                        $pic_name=time()."_slider_".$img;
+                        move_uploaded_file($img_tmp_name,"../Homepage/images/".$pic_name);
+                        $sql = "UPDATE `room` SET `room_name`='$room_name',`room_type`='$room_type', `no_of_room`=$no_of_room, `image` ='$pic_name' WHERE  `room_id`=$room_id";
+
+                    
+                        if($conn->query($sql)){
+                            
+                    Header("Location: room_view"); 
+                        }
+                        else{
+                            throw new Exception("Query error".$conn->error);
+                        }
+                    }
+                    else{
+                        throw new Exception("The image size should be less than 50Mb");
+                    }
                 }
-            }catch(Exceptionn $e){
-                $e=$e->getMessage();
-                Header("Location: error_message?message=$e");  
+                else{
+                throw new Exception("Image type should be JPEG, JPG ,PNG ,GIF.<br> TRY AGAIN");
+                }
             }
-            
+        catch(Exception $e){
+            $e=$e->getMessage();
+            Header("Location: error_message? message=$e");
         }
+      }
+    }
+    public function addRoom(){
+        GLOBAL $conn;
+        if(isset($_POST['addRoom'])){
+            // echo "something";
+            $room_name = $_POST['room_name'];
+            $room_price = $_POST['room_price'];
+            $room_type = $_POST['room_type'];
+            $no_of_room = $_POST['no_of_room'];
+            $img=$_FILES['img']['name'];
+            $img_type=$_FILES['img']['type'];
+            $img_tmp_name=$_FILES['img']['tmp_name'];
+            $img_size=$_FILES['img']['size'];
+        
+            try{
+                if($img_type=="image/jpeg" || $img_type=="image/jpg" || $img_type=="image/png" || $img_type=="image/gif"){
+                    if($img_size<=50000000){
+                        $pic_name=time()."_room_".$img;
+                        move_uploaded_file($img_tmp_name,"../Homepage/images/".$pic_name);
+                        $sql = "INSERT INTO `room`(`room_type`, `room_price`,`room_name`,`image`,`no_of_room`) VALUES('$room_type',$room_price,'$room_name', '$pic_name', $no_of_room)";
+                    
+                        if($conn->query($sql)){
+                            Header("Location: room_view"); 
+                        }
+                        else{
+                            throw new Exception("Query error".$conn->error);
+                        }
+                    }
+                    else{
+                        throw new Exception("The image size should be less than 50Mb");
+                    }
+                }
+                else{
+                throw new Exception("Image type should be JPEG, JPG ,PNG ,GIF.<br> TRY AGAIN");
+                }
+            }
+        catch(Exception $e){
+            $e=$e->getMessage();
+            Header("Location: error_message? message=$e");
+        }
+      }
     }
     public function editRoom(){
         GLOBAL $conn;
@@ -158,7 +222,7 @@ class Room{
         if(isset($_GET['deleteMember'])){
             foreach($_POST['selectedMember'] as $tm_id)
             {
-                $query = "DELETE FROM `team_members` WHERE `id`='$tm_id'";
+                $query = "DELETE FROM `room` WHERE `room_id`='$tm_id'";
                 $conn->query($query);
             }
         }
@@ -170,7 +234,7 @@ class Room{
         if(isset($_GET['unapproveMember'])){
             foreach($_POST['selectedMember'] as $tm_id)
             {
-                $query = "UPDATE `team_members` SET `status`='unapproved' WHERE `id`='$tm_id'";
+                $query = "UPDATE `room` SET `status`='under maintenance' WHERE `room_id`='$tm_id'";
                 $conn->query($query);
             }
         }
@@ -181,8 +245,9 @@ class Room{
         global $conn;
         if(isset($_GET['approveMember'])){
             foreach($_POST['selectedMember'] as $tm_id)
+            // echo "<p>we are here</p>";
             {
-                $query = "UPDATE `team_members` SET `status`='approved' WHERE `id`='$tm_id'";
+                $query = "UPDATE `room` SET `status`='free' WHERE `room_id`='$tm_id'";
                 $conn->query($query);
             }
         }
@@ -190,9 +255,10 @@ class Room{
     }
 }
 $room= new Room();
-// $team->addmember();
-// $team->approveMember();
-// $team->unapproveMember();
-// $team->deleteMember();
+$room->updateRoom();
+$room->addRoom();
+$room->approveMember();
+$room->unapproveMember();
+$room->deleteMember();
 
 ?>
